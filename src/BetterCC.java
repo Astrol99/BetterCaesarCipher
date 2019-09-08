@@ -37,8 +37,20 @@ public class BetterCC{
         }
     }
 
+    public char encryptChar(char initalChar){
+        char convertedChar;
+        
+        try {
+            convertedChar = alphabet.charAt(alphabet.indexOf(initalChar)+key);
+        }catch (StringIndexOutOfBoundsException e){
+            int tempNum = (alphabet.indexOf(initalChar)+key)%26;
+            convertedChar = alphabet.charAt(tempNum);
+        }
+        return convertedChar;
+    }
+
     // Encrypts plain text with caesar cipher method
-    public void encrypt(){
+    public void mainCipher(){
 
         for (int i = 0;i <= plainText.length() - 1;i++){
             Character initalChar = plainText.charAt(i);
@@ -50,13 +62,15 @@ public class BetterCC{
             if (alphabet.contains(initalStr) == false){            // Checks if char is in alphabet string
                 cipherText += initalChar; continue;                // Skips loop and adds it to cipherText if false
             }
-            cipherText += alphabet.charAt(alphabet.indexOf(initalChar)+key);
+
+            cipherText += encryptChar(initalChar);
         }
 
         System.out.println(cipherText);
-    }     
+    }
+
     public static void main(String[] args) {
-        BetterCC caeser = new BetterCC("Aa Bb", 5);
-        caeser.encrypt();
+        BetterCC caeser = new BetterCC("Aa Bb Zz", 30);
+        caeser.mainCipher();
     }
 }    
