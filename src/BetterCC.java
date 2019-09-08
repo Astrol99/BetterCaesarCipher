@@ -13,7 +13,8 @@ public class BetterCC{
     
     String plainText;
     String cipherText;
-    boolean caps; 
+    boolean caps;
+    boolean encryptMode; 
     int key; // Secret key to decrypt already encrypted string
 
     // Main cipher base
@@ -22,9 +23,10 @@ public class BetterCC{
     String alphabet;    // Final alphabet that decides if it is lowercase or uppercase
 
     // Main cipher class    
-    public BetterCC(String input, int secretKey){
+    public BetterCC(String input, int secretKey, boolean crypt){
         plainText = input;
         key = secretKey;
+        cryptMode = crypt;
         cipherText = "";   // Gets rid of null in string
     }
 
@@ -37,14 +39,14 @@ public class BetterCC{
         }
     }
 
-    public char encryptChar(char initalChar){
+    public char cryptChar(char initalChar){
         char convertedChar;
         
-        try {
-            convertedChar = alphabet.charAt(alphabet.indexOf(initalChar)+key);
-        }catch (StringIndexOutOfBoundsException e){
-            int tempNum = (alphabet.indexOf(initalChar)+key)%26;
-            convertedChar = alphabet.charAt(tempNum);
+        try {                                                                        
+            convertedChar = alphabet.charAt(alphabet.indexOf(initalChar)+key);      // If the key or letter is over the   
+        }catch (StringIndexOutOfBoundsException e){                                 // limit of 26 or 'z', it will use
+            int tempNum = (alphabet.indexOf(initalChar)+key)%26;                    // the modulos operator to find 
+            convertedChar = alphabet.charAt(tempNum);                               // the key that is less than 27
         }
         return convertedChar;
     }
@@ -63,7 +65,7 @@ public class BetterCC{
                 cipherText += initalChar; continue;                // Skips loop and adds it to cipherText if false
             }
 
-            cipherText += encryptChar(initalChar);
+            cipherText += cryptChar(initalChar);
         }
 
         System.out.println(cipherText);
