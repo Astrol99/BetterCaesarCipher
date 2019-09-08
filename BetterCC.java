@@ -19,20 +19,25 @@ public class BetterCC{
     // Main cipher base
     static String alphabetUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     static String alphabetLower = alphabetUpper.toLowerCase();
+    String alphabet;
 
     // Main cipher class    
     public BetterCC(String input, int secretKey){
         plainText = input;
         key = secretKey;
+        cipherText = ""; // Gets rid of null in string
     }
 
     // Encrypts plain text with caesar cipher method
     public void encrypt(){
-        
-        int len = plainText.length();
-        System.out.println(len);
+
+        for (int i=0;i<=plainText.length()-1;i++){
+            cipherText += alphabetUpper.charAt(alphabetUpper.indexOf(plainText.charAt(i))+key);
+        }
+        System.out.println(cipherText);
     }
     public static void main(String[] args) {
-        
+        BetterCC caeser = new BetterCC("AAAA", 5);
+        caeser.encrypt();
     }
 }    
