@@ -14,12 +14,13 @@ public class BetterCC{
     // Parameters for cipher
     String plainText;
     String cipherText;
+    boolean caps;
     int key;
 
     // Main cipher base
     static String alphabetUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     static String alphabetLower = alphabetUpper.toLowerCase();
-    String alphabet;
+    String alphabet; // Final alphabet that decides if it is lowercase or uppercase
 
     // Main cipher class    
     public BetterCC(String input, int secretKey){
@@ -28,16 +29,34 @@ public class BetterCC{
         cipherText = ""; // Gets rid of null in string
     }
 
+    // Decides between lower and upper chars
+    public void alphabetCaps(){
+        if(caps == true){
+            alphabet = alphabetUpper;
+        }else{
+            alphabet = alphabetLower;
+        }
+    }
+
     // Encrypts plain text with caesar cipher method
     public void encrypt(){
 
-        for (int i=0;i<=plainText.length()-1;i++){
-            cipherText += alphabetUpper.charAt(alphabetUpper.indexOf(plainText.charAt(i))+key);
+        for (int i = 0;i <= plainText.length() - 1;i++){
+            Character initalChar = plainText.charAt(i);
+            String initalStr = initalChar.toString();
+
+            caps = !initalStr.equals(initalStr.toLowerCase());     // Checks if char is caps and changes
+            alphabetCaps();                                        // entire alphabet accordingly
+
+            if (alphabet.contains(initalStr) == false){      // Checks if char is in alphabet string
+                cipherText += initalChar; continue;          // Skips loop and adds it to cipherText if false
+            }
+            cipherText += alphabet.charAt(alphabet.indexOf(initalChar)+key);
         }
+
         System.out.println(cipherText);
-    }
-    public static void main(String[] args) {
-        BetterCC caeser = new BetterCC("AAAA", 5);
+    }     public static void main(String[] args) {
+        BetterCC caeser = new BetterCC("Aa Bb", 5);
         caeser.encrypt();
     }
 }    
