@@ -11,22 +11,21 @@ import java.util.Random;
 
 public class BetterCC{
     
-    // Parameters for cipher
     String plainText;
     String cipherText;
-    boolean caps;
-    int key;
+    boolean caps; 
+    int key; // Secret key to decrypt already encrypted string
 
     // Main cipher base
     static String alphabetUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     static String alphabetLower = alphabetUpper.toLowerCase();
-    String alphabet; // Final alphabet that decides if it is lowercase or uppercase
+    String alphabet;    // Final alphabet that decides if it is lowercase or uppercase
 
     // Main cipher class    
     public BetterCC(String input, int secretKey){
         plainText = input;
         key = secretKey;
-        cipherText = ""; // Gets rid of null in string
+        cipherText = "";   // Gets rid of null in string
     }
 
     // Decides between lower and upper chars
@@ -48,14 +47,15 @@ public class BetterCC{
             caps = !initalStr.equals(initalStr.toLowerCase());     // Checks if char is caps and changes
             alphabetCaps();                                        // entire alphabet accordingly
 
-            if (alphabet.contains(initalStr) == false){      // Checks if char is in alphabet string
-                cipherText += initalChar; continue;          // Skips loop and adds it to cipherText if false
+            if (alphabet.contains(initalStr) == false){            // Checks if char is in alphabet string
+                cipherText += initalChar; continue;                // Skips loop and adds it to cipherText if false
             }
             cipherText += alphabet.charAt(alphabet.indexOf(initalChar)+key);
         }
 
         System.out.println(cipherText);
-    }     public static void main(String[] args) {
+    }     
+    public static void main(String[] args) {
         BetterCC caeser = new BetterCC("Aa Bb", 5);
         caeser.encrypt();
     }
