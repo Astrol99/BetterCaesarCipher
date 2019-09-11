@@ -6,15 +6,12 @@ Author: Astrol99
 Date: 09/07/19
 */
 
-import java.util.Scanner;
-import java.util.Random;
-
 public class BetterCC{
     
     String plainText;
     String cipherText;
     boolean caps;
-    int cryptMode; // 0 = encrypt; 1 = decrypt; 2 = bruteforce
+    int cryptMode; // 0 = encrypt; 1 = decrypt;
     int key; // Secret key to decrypt already encrypted string
 
     // Main cipher base
@@ -94,7 +91,7 @@ public class BetterCC{
     }
 
     public static void main(String[] args) {
-        BetterCC caeser = new BetterCC("Aa Bb Zz", 30, 1);      // Make sure limit of key is 0-26
+        BetterCC caeser = new BetterCC("Hello, World!", 13, 0);      // Make sure limit of key is 0-26
         caeser.mainCipher();
     }
 }    
