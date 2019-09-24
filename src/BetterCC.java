@@ -91,7 +91,7 @@ public class BetterCC{
     }
 
     public static void main(String[] args) {
-        BetterCC caeser = new BetterCC("Hello, World!", 13, 0);      // Make sure limit of key is 0-26
+        BetterCC caeser = new BetterCC(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]));      // Make sure limit of key is 0-26
         caeser.mainCipher();
     }
 }    
