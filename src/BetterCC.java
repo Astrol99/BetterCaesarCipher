@@ -88,17 +88,25 @@ public class BetterCC{
         }
     }
 
+    // Sends user results and data
     public void output(){
+        System.out.println("\nOriginal String: "+plainText);
+        System.out.println("Key: "+key);
+        if (cryptMode == 0){
+            System.out.println("Encrypted String: "+cipherText);
+        }else if (cryptMode == 1){
+            System.out.println("Decrypted String: "+cipherText);
+        }
+    }
 
+    // Built-in help command
+    public void help(){
+        System.out.print("s");
     }
 
     public static void main(String[] args) {
-        try{
-            BetterCC caeser = new BetterCC(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]));      // Make sure limit of key is 0-26
-        }catch(NumberFormatException e){                // Check if user inputed correct format correctly
-            System.err.println("[!] Invalid Usage: java BetterCC <String> <key num> <mode either 0 or 1(0 = encrypt,1 = decrypt)>");
-            System.exit(1);
-        }
+        BetterCC caeser = new BetterCC(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]));      // Make sure limit of key is 0-26
         caeser.mainCipher();
+        caeser.output();
     }
 }    
