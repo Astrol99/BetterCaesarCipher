@@ -82,16 +82,23 @@ public class BetterCC{
             }else if (cryptMode == 1){
                 cipherText += decryptChar(initalChar);
             }else{
-                System.err.println("Error: Error determining crypt mode");      // Prints this out if something wrong happens
-                return;                                                         // then exits out of program
+                System.err.println("[!] Error: Invalid crypt mode");      // Prints this out if something wrong happens
+                System.exit(1);                                                        // then exits out of program
             }
         }
+    }
 
-        System.out.println(cipherText);
+    public void output(){
+
     }
 
     public static void main(String[] args) {
-        BetterCC caeser = new BetterCC(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]));      // Make sure limit of key is 0-26
+        try{
+            BetterCC caeser = new BetterCC(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]));      // Make sure limit of key is 0-26
+        }catch(NumberFormatException e){                // Check if user inputed correct format correctly
+            System.err.println("[!] Invalid Usage: java BetterCC <String> <key num> <mode either 0 or 1(0 = encrypt,1 = decrypt)>");
+            System.exit(1);
+        }
         caeser.mainCipher();
     }
 }    
