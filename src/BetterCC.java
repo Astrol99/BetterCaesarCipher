@@ -90,21 +90,36 @@ public class BetterCC{
 
     // Sends user results and data
     public void output(){
-        System.out.println("\nOriginal String: "+plainText);
-        System.out.println("Key: "+key);
+        System.out.println("\n<Original String>: "+plainText);
+        System.out.println("<Key>: "+key);
         if (cryptMode == 0){
-            System.out.println("Encrypted String: "+cipherText);
+            System.out.println("<Encrypted String>: "+cipherText);
         }else if (cryptMode == 1){
-            System.out.println("Decrypted String: "+cipherText);
+            System.out.println("<Decrypted String>: "+cipherText);
         }
     }
 
     // Built-in help command
-    public void help(){
-        System.out.print("s");
+    static public void help(){
+        System.out.println("\n[?] Usage: java BetterCC <String> <Key> <Crypt Mode>");
+        System.out.println("\n<String>: If your input string has spaces, use quotation marks around the string");
+        System.out.println("<Key>: The key for your string to either encrypt or decrypt it. You can use any number");
+        System.out.println("<Crypt Mode>: Can only be either 0 or 1. | 0 = Encrypt | 1 = Decrypt |");
+        System.out.println("\n~ Made by astrol99");
+
+        System.exit(0);
+    }
+
+    // Detects user error and exits
+    public void userErr(){
+
     }
 
     public static void main(String[] args) {
+        if (args[0].equals("?")){
+            help();
+        }
+        
         BetterCC caeser = new BetterCC(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]));      // Make sure limit of key is 0-26
         caeser.mainCipher();
         caeser.output();
