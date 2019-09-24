@@ -83,7 +83,7 @@ public class BetterCC{
                 cipherText += decryptChar(initalChar);
             }else{
                 System.err.println("[!] Error: Invalid crypt mode");      // Prints this out if something wrong happens
-                System.exit(1);                                                        // then exits out of program
+                help();                                                        // then exits out of program
             }
         }
     }
@@ -110,18 +110,19 @@ public class BetterCC{
         System.exit(0);
     }
 
-    // Detects user error and exits
-    public void userErr(){
-
-    }
-
     public static void main(String[] args) {
         if (args[0].equals("?")){
             help();
         }
         
-        BetterCC caeser = new BetterCC(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]));      // Make sure limit of key is 0-26
-        caeser.mainCipher();
-        caeser.output();
+        try {
+            BetterCC caeser = new BetterCC(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+            caeser.mainCipher();
+            caeser.output();
+        } catch (NumberFormatException e){
+            System.out.println("[!] Error: Invalid Command Usage");
+            help();
+            System.exit(1);
+        }    
     }
 }    
