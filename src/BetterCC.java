@@ -110,19 +110,30 @@ public class BetterCC{
         System.exit(0);
     }
 
+    // Checks for invalid command line args and prints proper error msg
+    static public void invalidCommand(){
+        System.out.println("[!] Error: Invalid Command Usage");
+        help();
+        System.exit(1);
+    }
+
     public static void main(String[] args) {
-        if (args[0].equals("?")){
-            help();
-        }
-        
         try {
-            BetterCC caeser = new BetterCC(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+            String plain = args[0];
+            int key = Integer.parseInt(args[1]);
+            int mode = Integer.parseInt(args[2]);
+            
+            if (plain.equals("help") || plain.equals("-h")){
+                help();
+            }
+
+            BetterCC caeser = new BetterCC(plain, key, mode);
             caeser.mainCipher();
             caeser.output();
         } catch (NumberFormatException e){
-            System.out.println("[!] Error: Invalid Command Usage");
-            help();
-            System.exit(1);
-        }    
+            invalidCommand();
+        } catch (ArrayIndexOutOfBoundsException e){
+            invalidCommand();
+        }	       
     }
 }    
